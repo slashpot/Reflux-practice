@@ -1,6 +1,5 @@
 import React from 'react';
 import Reflux from 'reflux';
-import Remarkable from 'remarkable';
 import EditorStore from '../stores/EditorStore'
 
 class EditorOutput extends Reflux.Component {
@@ -9,17 +8,14 @@ class EditorOutput extends Reflux.Component {
         this.state = {};
         this.store = EditorStore;
     }
-
-    getRawMarkup() {
-        var md = new Remarkable();
-        return { __html: md.render(this.state.content) };
+    getMDContent() {
+        return {__html: this.state.content};
     }
-
     render() {
         return (
             <div>
                 <h3>Output</h3>
-                <div dangerouslySetInnerHTML={this.getRawMarkup()}>
+                <div dangerouslySetInnerHTML={this.getMDContent()}>
                 </div>
             </div>
         );

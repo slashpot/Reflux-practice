@@ -1,4 +1,5 @@
 import Reflux from 'reflux';
+import Remarkable from 'remarkable';
 import {EditorActions} from '../actions/editorActions';
 
 class EditorStore extends Reflux.Store {
@@ -8,9 +9,8 @@ class EditorStore extends Reflux.Store {
         this.listenables = EditorActions;
     }
     onTransformToMD(text) {
-        console.log(text);
-        this.setState({content: text});
-        
+        var md = new Remarkable();
+        this.setState({content: md.render(text)});  
     }
 }
 
